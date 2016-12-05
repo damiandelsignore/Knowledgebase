@@ -1,0 +1,35 @@
+<aspx:AspxPage runat="server" Id="FAQ_Management" title="FAQ Management">
+<body>
+
+<aspx:IncludeStandardScript runat='server' ScriptType='REST' version='2.0' />
+<script src="/Contents/Assets/Test/New node/FAQScript.js"></script>
+<div id="titleArea"></div>
+<div class="OSKB">
+    
+    <script>
+    // Request.QueryString["key"] is a C# method that returns the value of a QueryString (ie)
+    // the value for the key variableName in: websiteAddress.com/pageWhatever?variableName=value
+    var practice = '<%=Request.QueryString["practice"]%>';
+    var userGroups = "<%=DataBag.userGroups%>";
+    
+    if (practice) {
+        displayFAQManagementHeader(practice);
+        displayFAQManagement(practice);
+    } 
+    else {
+        $("#titleArea").html("<h2>FAQ Management</h2><p>Click a practice to view, edit, approve, delete or create FAQs.</p>");
+        document.write(
+            "<h3><a href='/aspx/FAQManagement?practice=Anaplan'>Anaplan</a></h3>" +
+            "<h3><a href='/aspx/FAQManagement?practice=Callidus'>Callidus</a></h3>" +
+            "<h3><a href='/aspx/FAQManagement?practice=IBM ICM'>IBM ICM</a></h3>" +
+            "<h3><a href='/aspx/FAQManagement?practice=Xactly'>Xactly</a></h3>" +
+            "<h3><a href='/aspx/FAQManagement?practice=View All'>View All</a></h3>" +
+            "<h3 id='newFAQ'><a href='/aspx/FAQEditor'> Input New FAQ</a></h3>"
+        );
+    }
+    </script>
+
+    <ul class="FAQlist noBullet"></ul>
+</div>
+</body>
+</aspx:AspxPage>
